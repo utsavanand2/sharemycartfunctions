@@ -81,11 +81,11 @@ func UserCreated(ctx context.Context, e AuthEvent) error {
 		},
 	}
 
-	usersResult, err := dbClient.Collection("Users").Doc(e.UID).Create(context.Background(), user)
+	usersResult, err := dbClient.Collection("users").Doc(e.UID).Create(context.Background(), user)
 	if err != nil {
 		log.Fatalf("error writing to firestore: %v", err)
 	}
-	shoppingListRef, writeResult, err := dbClient.Collection("Users").Doc(e.UID).Collection("Lists").Add(ctx, list)
+	shoppingListRef, writeResult, err := dbClient.Collection("users").Doc(e.UID).Collection("lists").Add(ctx, list)
 	if err != nil {
 		log.Fatalf("error writing to firestore: %v", err)
 	}
